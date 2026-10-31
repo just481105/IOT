@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "author": "Duc Nam",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": -52.76, "attrs": {} },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "ultrasonic1",
+      "top": -132.9,
+      "left": -119.3,
+      "attrs": { "distance": "74" }
+    },
+    {
+      "type": "wokwi-photoresistor-sensor",
+      "id": "ldr1",
+      "top": -115.5,
+      "left": -293.5,
+      "rotate": 90,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": -278.1,
+      "left": -149.4,
+      "attrs": { "temperature": "35.8", "humidity": "60" }
+    },
+    { "type": "wokwi-led", "id": "led1", "top": 44.4, "left": -169, "attrs": { "color": "red" } },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 139.2,
+      "left": -182.95,
+      "rotate": 90,
+      "attrs": { "value": "220" }
+    },
+    { "type": "wokwi-lcd2004", "id": "lcd1", "top": -80, "left": 92, "attrs": { "pins": "i2c" } },
+    {
+      "type": "wokwi-relay-module",
+      "id": "relay1",
+      "top": 294.2,
+      "left": -64.4,
+      "rotate": 90,
+      "attrs": {}
+    },
+    { "type": "board-mfrc522", "id": "rfid1", "top": 122.15, "left": 99.44, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "esp:3V3", "rfid1:3.3V", "black", [ "h-9.45", "v192", "h0", "v9.6" ] ],
+    [ "esp:3V3", "ldr1:VCC", "black", [ "h0.15", "v0", "h-230.4" ] ],
+    [ "esp:5V", "ultrasonic1:VCC", "red", [ "h-19.05", "v-211.2", "h-9.6" ] ],
+    [ "esp:5V", "dht1:VCC", "red", [ "h-28.65", "v-211.2", "h-67.2", "v-9.6" ] ],
+    [ "esp:5V", "lcd1:VCC", "red", [ "h-28.65", "v19.2", "h153.6", "v-259.2" ] ],
+    [ "esp:5V", "relay1:VCC", "red", [ "h0.15", "v38.4", "h57.6" ] ],
+    [ "rfid1:GND", "esp:GND.2", "yellow", [ "h-48", "v-182.4", "h9.6" ] ],
+    [ "lcd1:GND", "esp:GND.2", "yellow", [ "h-28.8", "v76.8" ] ],
+    [ "ultrasonic1:GND", "esp:GND.2", "yellow", [ "v0", "h75.6" ] ],
+    [ "ldr1:GND", "esp:GND.2", "yellow", [ "v9.6", "h163.6", "v-28.8", "h76.8", "v38.4" ] ],
+    [ "relay1:GND", "esp:GND.2", "yellow", [ "v-9.6", "h67.6", "v-211.2" ] ],
+    [ "dht1:GND", "esp:GND.2", "yellow", [ "v9.6", "h163.2", "v172.8" ] ],
+    [ "rfid1:SDA", "esp:5", "green", [ "h-19.2", "v-48" ] ],
+    [ "rfid1:SCK", "esp:18", "green", [ "h-19.2", "v-67.2" ] ],
+    [ "rfid1:MOSI", "esp:23", "green", [ "h-9.6", "v-76.8", "h-9.6", "v-67.2" ] ],
+    [ "rfid1:MISO", "esp:19", "green", [ "h-19.2", "v-96" ] ],
+    [ "rfid1:RST", "esp:15", "green", [ "h-19.2", "v-76.8", "h-19.2", "v-96" ] ],
+    [ "lcd1:SDA", "esp:21", "cyan", [ "h-9.6", "v9.8" ] ],
+    [ "lcd1:SCL", "esp:22", "cyan", [ "h-9.6", "v9.9" ] ],
+    [ "ultrasonic1:TRIG", "esp:12", "magenta", [ "v9.6", "h-48.4", "v172.8" ] ],
+    [ "ultrasonic1:ECHO", "esp:14", "magenta", [ "v9.6", "h-77.6", "v96", "h9.6", "v76.8" ] ],
+    [
+      "dht1:SDA",
+      "esp:4",
+      "#8f4814",
+      [ "v19.2", "h585.7", "v220.8", "h0", "v28.8", "h-384", "v38.4" ]
+    ],
+    [ "ldr1:AO", "esp:34", "green", [ "v38.4", "h96.7", "v28.8" ] ],
+    [ "led1:A", "esp:2", "magenta", [ "v0", "h28.8", "v153.6", "h192", "v-96" ] ],
+    [ "led1:C", "r1:1", "white", [ "v0" ] ],
+    [ "r1:2", "esp:GND.1", "black", [ "h0", "v18", "h57.6", "v-38.4" ] ]
+  ],
+  "dependencies": {}
+}
